@@ -320,6 +320,11 @@ export const model = {
           .map((s) => s.trim())
           .filter((s) => s.length > 0);
 
+        context.logger.info(
+          "Checking serve token expiry in {repoDir} (warnDays={warnDays})",
+          { repoDir, warnDays },
+        );
+
         const tokens = await loadTokens(
           defaultCommandRunner,
           swampBin,

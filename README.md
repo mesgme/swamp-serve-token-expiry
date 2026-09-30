@@ -44,10 +44,10 @@ The `status` resource:
 ```json
 {
   "tokens": [
-    { "name": "puddle-ui-service", "status": "warn", "daysRemaining": 5, "expiresAt": "2026-10-06T00:00:00.000Z" }
+    { "name": "ci-service-token", "status": "warn", "daysRemaining": 5, "expiresAt": "2026-10-06T00:00:00.000Z" }
   ],
   "needsWarning": true,
-  "summary": "puddle-ui-service expires in 5 days (2026-10-06)"
+  "summary": "ci-service-token expires in 5 days (2026-10-06)"
 }
 ```
 
