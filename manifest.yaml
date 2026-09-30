@@ -7,3 +7,6 @@ paths:
   base: manifest
 models:
   - extensions/models/serve_token_expiry.ts
+additionalFiles:
+  - README.md
+  - LICENSE
