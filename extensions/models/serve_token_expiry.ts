@@ -309,7 +309,11 @@ export const model = {
           .map((s) => s.trim())
           .filter((s) => s.length > 0);
 
-        const tokens = await loadTokens(defaultCommandRunner, swampBin, repoDir);
+        const tokens = await loadTokens(
+          defaultCommandRunner,
+          swampBin,
+          repoDir,
+        );
         const report = evaluateTokenExpiry(tokens, new Date(), warnDays, names);
 
         context.logger.info("Token expiry check: {summary}", {
