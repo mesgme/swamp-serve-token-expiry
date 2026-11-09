@@ -19,6 +19,7 @@ import { z } from "npm:zod@4";
 // Types
 // ---------------------------------------------------------------------------
 
+/** Expiry classification for a single token. */
 export type TokenStatus = "expired" | "warn" | "ok";
 
 /** The subset of `swamp access token list --json` fields we rely on. */
@@ -28,6 +29,7 @@ export interface TokenInfo {
   expiresAt: string;
 }
 
+/** A token after classification, as written to the `status` resource. */
 export interface EvaluatedToken {
   name: string;
   status: TokenStatus;
@@ -35,12 +37,14 @@ export interface EvaluatedToken {
   expiresAt: string;
 }
 
+/** The `status` resource written by the `check` method. */
 export interface ExpiryReport {
   tokens: EvaluatedToken[];
   needsWarning: boolean;
   summary: string;
 }
 
+/** Exit code and captured output from a command invocation. */
 export interface CommandResult {
   code: number;
   stdout: string;
@@ -176,6 +180,7 @@ export function evaluateTokenExpiry(
   return { tokens: evaluated, needsWarning, summary };
 }
 
+/** Parse `swamp access token list --json` output into `TokenInfo[]`. */
 export function parseTokenList(stdout: string): TokenInfo[] {
   const parsed = TokenListSchema.parse(JSON.parse(stdout));
   return parsed.map((t) => ({
@@ -204,6 +209,11 @@ export const defaultCommandRunner: CommandRunner = async (cmd, args) => {
   };
 };
 
+/**
+ * Load token metadata by running `swamp access token list --json` through the
+ * given runner. Throws on a non-zero exit. The runner is injectable so the
+ * command and parsing can be tested without a real swamp binary.
+ */
 export async function loadTokens(
   runner: CommandRunner,
   swampBin: string,
@@ -254,6 +264,7 @@ type CheckContext = ModelContext & {
 // Model export
 // ---------------------------------------------------------------------------
 
+/** The swamp model type: `check` classifies serve tokens and writes `status`. */
 export const model = {
   type: "@mesgme/serve-token-expiry",
   version: "2026.09.30.1",
@@ -309,7 +320,16 @@ export const model = {
           .map((s) => s.trim())
           .filter((s) => s.length > 0);
 
-        const tokens = await loadTokens(defaultCommandRunner, swampBin, repoDir);
+        context.logger.info(
+          "Checking serve token expiry in {repoDir} (warnDays={warnDays})",
+          { repoDir, warnDays },
+        );
+
+        const tokens = await loadTokens(
+          defaultCommandRunner,
+          swampBin,
+          repoDir,
+        );
         const report = evaluateTokenExpiry(tokens, new Date(), warnDays, names);
 
         context.logger.info("Token expiry check: {summary}", {
