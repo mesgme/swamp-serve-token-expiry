@@ -2,6 +2,7 @@ manifestVersion: 1
 name: "@mesgme/serve-token-expiry"
 version: "2026.09.30.1"
 description: "Warn before swamp serve tokens expire — a reusable model type for any swamp repo"
+license: "Apache-2.0"
 repository: "https://github.com/mesgme/swamp-serve-token-expiry"
 paths:
   base: manifest
