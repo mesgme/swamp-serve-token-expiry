@@ -8,6 +8,14 @@ secret material — from `swamp access token list --json`, classifies each activ
 token as `expired`, `warn`, or `ok`, and writes a `status` resource that a
 workflow can act on (for example, pushing an ntfy alert).
 
+## Value statement
+
+Stops a swamp serve token from lapsing unnoticed. It checks the expiry dates of
+a repo's active serve tokens (metadata only, never secrets), classifies each as
+ok, warn or expired against a configurable warning window (default 7 days), and
+writes a status that a workflow can turn into an alert, so clients are not taken
+down silently by an expired token.
+
 ## Install
 
 ```bash
