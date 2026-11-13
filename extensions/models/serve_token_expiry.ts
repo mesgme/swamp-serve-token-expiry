@@ -1,5 +1,5 @@
 /**
- * @mesgme/serve-token-expiry — warn before swamp serve tokens expire.
+ * @puddleworks/serve-token-expiry — warn before swamp serve tokens expire.
  *
  * Reads token metadata from `swamp access token list --json` (no secret
  * material) and reports which tokens are near or past expiry. Nothing here is
@@ -266,8 +266,8 @@ type CheckContext = ModelContext & {
 
 /** The swamp model type: `check` classifies serve tokens and writes `status`. */
 export const model = {
-  type: "@mesgme/serve-token-expiry",
-  version: "2026.09.30.1",
+  type: "@puddleworks/serve-token-expiry",
+  version: "2026.11.13.1",
   globalArguments: z.object({
     repoDir: z
       .string()

@@ -1,4 +1,4 @@
-# @mesgme/serve-token-expiry
+# @puddleworks/serve-token-expiry
 
 Warn before swamp serve tokens expire, so a service token does not lapse and
 take its clients down silently.
@@ -11,10 +11,10 @@ workflow can act on (for example, pushing an ntfy alert).
 ## Install
 
 ```bash
-swamp extension pull @mesgme/serve-token-expiry
+swamp extension pull @puddleworks/serve-token-expiry
 ```
 
-## Model: `@mesgme/serve-token-expiry`
+## Model: `@puddleworks/serve-token-expiry`
 
 ### Global arguments
 
@@ -31,7 +31,7 @@ Lists the tokens, classifies them against `warnDays`, and writes one `status`
 resource. Read-only: it never reveals or alters a token secret.
 
 ```bash
-swamp model create @mesgme/serve-token-expiry serve-token-expiry \
+swamp model create @puddleworks/serve-token-expiry serve-token-expiry \
   --global-arg repoDir=/Users/you/dev/your-repo \
   --global-arg warnDays=7
 
