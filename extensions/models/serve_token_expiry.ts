@@ -267,7 +267,7 @@ type CheckContext = ModelContext & {
 /** The swamp model type: `check` classifies serve tokens and writes `status`. */
 export const model = {
   type: "@puddleworks/serve-token-expiry",
-  version: "2026.11.13.1",
+  version: "2026.11.13.2",
   globalArguments: z.object({
     repoDir: z
       .string()
